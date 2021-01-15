@@ -1,4 +1,4 @@
-package com.zjx.repository.es;
+package com.zjx.entity.es;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -16,11 +16,11 @@ public class EsBlog {
     @Id
     private Integer id;
 
-    @Field(type = FieldType.String,analyzer = "ik_max_word")
+    @Field(type = FieldType.Text,analyzer = "ik_max_word")
     private String title;
-    @Field(type = FieldType.String,analyzer = "ik_max_word")
+    @Field(type = FieldType.Text,analyzer = "ik_max_word")
     private String author;
-    @Field(type = FieldType.String,analyzer = "ik_max_word")
+    @Field(type = FieldType.Text,analyzer = "ik_max_word")
     private String content;
     @Field(type = FieldType.Date,format = DateFormat.custom,
             pattern = "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis")

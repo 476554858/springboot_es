@@ -1,8 +1,8 @@
 package com.zjx.controller;
 
-import com.zjx.entity.es.EsBlogRepository;
+import com.zjx.repository.es.EsBlogRepository;
 import com.zjx.entity.mysql.MysqlBlog;
-import com.zjx.repository.es.EsBlog;
+import com.zjx.entity.es.EsBlog;
 import com.zjx.repository.mysql.MysqlBlogRepository;
 import lombok.Data;
 import org.elasticsearch.index.query.BoolQueryBuilder;
