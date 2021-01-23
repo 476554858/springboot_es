@@ -22,4 +22,12 @@ public class IndexController {
         System.out.println( esBlogRepository.count());
         return "index.html";
     }
+
+    @RequestMapping("/jd")
+    public String jdPage(){
+      /*  List<MysqlBlog> all = mysqlBlogRepository.findAll();
+        System.out.println(all.size());*/
+        return "jd.html";
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.zjx.config;
 
+import org.springframework.boot.autoconfigure.elasticsearch.rest.RestClientAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -23,4 +24,5 @@ public class CorsConfig {
         source.registerCorsConfiguration("/**",buildConfig());
         return new CorsFilter(source);
     }
+
 }

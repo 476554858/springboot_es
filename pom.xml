@@ -73,11 +73,35 @@
             <version>5.3.3</version>
             <scope>test</scope>
         </dependency>
+
+		<!--以下是新版本ES的依赖， 新版本API调用方式可在TEST类中查看-->
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>elasticsearch-rest-high-level-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.searchbox</groupId>
+			<artifactId>jest</artifactId>
+			<version>5.3.3</version>
+			<scope>test</scope>
+		</dependency>
 		<!--<dependency>-->
 			<!--<groupId>io.searchbox</groupId>-->
 			<!--<artifactId>jest-common</artifactId>-->
 			<!--<version>5.3.3</version>-->
 		<!--</dependency>-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.66</version>
+		</dependency>
+
+		<!--解析网页-->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.10.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

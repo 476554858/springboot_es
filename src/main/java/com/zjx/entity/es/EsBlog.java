@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @Document(indexName = "blog",type="blog",
-        useServerConfiguration = true,createIndex = false)
+        useServerConfiguration = true,createIndex = true)
 public class EsBlog {
     @Id
     private Integer id;

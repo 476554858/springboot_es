@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-12">
+            <h2>
+                Springboot + ES - 演示京东高亮搜索
+            </h2>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px;" id="app">
+        <div class="col-9">
+            <form class="form-inline">
+                <div class="form-group mb-2">
+                    <input type="text" class="form-control" id="title-mysql" placeholder="检索你的检索" v-model="keyword">
+                </div>
+                <button type="button" class="btn btn-primary mb-2" style="margin-left: 5px;" @click="search">搜索</button>
+            </form>
+            <div class="row" >
+                <div class="col-sm-6" v-for="(goods,index) in goodsList" style="margin-top: 20px;">
+                    <div class="card">
+                        <div class="card-img-top">
+                            <img :src="goods.img" style="height: auto;width: 100%"/>
+                        </div>
+                        <div class="card-body">
+                            <h5 v-html="goods.title"></h5>
+                            <p style="color: red">{{goods.price}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script>
+
+    var app ;
+    app = new Vue({
+        el:'#app',
+        data:{
+            goodsList:[],
+            keyword:'',
+        },
+        methods:{
+            search:function () {
+                var that = this;
+                var param = {"keyword":that.keyword};
+                axios.get("http://localhost:8080/jd/data/page?keyword=" + that.keyword).then(function (res) {
+                    console.log(res)
+                    that.goodsList = res.data;
+                })
+            }
+        },
+        created:function () {
+            this.search();
+        }
+    })
+
+
+</script>
+</body>
+</html>
