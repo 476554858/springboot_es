@@ -13,7 +13,7 @@ public class PageDTO implements Pageable {
 
     @Override
     public int getPageNumber() {
-        return this.pageNum;
+        return (this.pageNum - 1) <= 0 ? 0 : (this.pageNum - 1);
     }
 
     @Override
