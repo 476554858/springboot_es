@@ -19,5 +19,6 @@ public class JDPojo {
 
     private String img;
 
+    @Field(type = FieldType.Keyword)
     private String price;
 }

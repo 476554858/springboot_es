@@ -18,8 +18,12 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Controller;
@@ -63,18 +67,9 @@ public class JDController {
     public Object jdDataPage(@RequestParam(value = "keyword",defaultValue = "") String keyword,
                              @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                              @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize)throws Exception{
-
-        BoolQueryBuilder builder = QueryBuilders.boolQuery();
-
         if(pageNum < 1){
             pageNum = 1;
         }
-        //C常规查法
-        //        PageDTO pageDTO = new PageDTO(pageNum, pageSize);
-//        if(!StringUtils.isEmpty(keyword)){
-//            builder.should(QueryBuilders.matchQuery("title", keyword));
-//        }
-//        Page<JDPojo> pojoPage = jdPojoRepository.search(builder, pageDTO);
 
         SearchRequest searchRequest = new SearchRequest("jd_pojo").types("_doc");
 
@@ -119,6 +114,30 @@ public class JDController {
             list.add(sourceAsMap);
         }
         return list;
+
+    }
+
+    @ResponseBody
+    @RequestMapping("/page2")
+    public Object jdDataPage2(@RequestParam(value = "keyword",defaultValue = "") String keyword,
+                             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize)throws Exception{
+
+        BoolQueryBuilder builder = QueryBuilders.boolQuery();
+
+        if(pageNum < 1){
+            pageNum = 1;
+        }
+        //常规查法
+        if(!StringUtils.isEmpty(keyword)){
+            builder.should(QueryBuilders.matchQuery("title", keyword));
+        }
+        Sort sort = Sort.by(Sort.Direction.DESC, "price");
+        PageRequest pageRequest = PageRequest.of(pageNum, pageSize, sort);
+
+        Page<JDPojo> pojos = jdPojoRepository.search(builder, pageRequest);
+        return pojos;
+
     }
 
 }
